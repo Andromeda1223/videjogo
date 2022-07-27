@@ -15,7 +15,7 @@ class Player {
       
   
       this.posX =  50
-      this.posY = this.gameHeight - this.height - 90 ;
+      this.posY = this.gameHeight - this.height - 80 ;
       this.posY0 = this.posY;
   
       this.velY = 1;
