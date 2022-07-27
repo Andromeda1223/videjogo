@@ -8,5 +8,4 @@ window.onload = () => {
         canvas.style.display = "block";
         Game.init();
     }
-    
 }

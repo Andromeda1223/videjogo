@@ -38,8 +38,6 @@ const Game = {
             this.generatePersonas()
             this.isCollision()
             this.colisionesMachete()
-            this.contadorDePuntuacion(this.puntuacion)
-            this.contadorDeVidas(this.vidas)
 
         }, 1000 / this.FPS)
     },
@@ -58,7 +56,6 @@ const Game = {
 
         })
         this.player.draw()
-        
     }
 
     ,
@@ -103,8 +100,7 @@ const Game = {
                 this.sonido()
                 this.personas.splice(index2, 1)
                 this.player.bullets.splice(index1, 1)
-                this.puntuacion = this.puntuacion + 10
-                
+                this.puntuacion++
                 
 
                 
@@ -116,16 +112,7 @@ sonido(){
     this.chucilloMusica.play()
 
 },
-contadorDePuntuacion(puntuacion){
-    this.ctx.fillStyle = "white"
-    this.ctx.font = '30px arial'
-    this.ctx.fillText(`Score: ${puntuacion}`, 50, 50)
-  },
-contadorDeVidas(vidas){
-    this.ctx.fillStyle = "white"
-    this.ctx.font = '30px arial'
-    this.ctx.fillText(`Vidas: ${vidas}`, 500, 50)
-}
+
 
 }
 
