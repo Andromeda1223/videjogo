@@ -14,7 +14,7 @@ const Game = {
     chucilloMusica: new Audio("Sonido de daño en Minecraft (Nuevotono.Net).mp3"),
     image: new Image(),
     src: "imagenes/portada 3 con titulo mono.jpg",
-    
+    policias: [],
     
     init() {
         this.canvas = document.getElementById("myCanvas")
@@ -39,11 +39,13 @@ const Game = {
             this.clear()
             this.drawAll()
             this.generatePersonas()
+            this.generatePolicias()
             this.isCollision()
             this.colisionesMachete()
             this.contadorDePuntuacion(this.puntuacion)
             this.contadorDeVidas(this.vidas)
             this.cambiadorDeSkin()
+            
             
 
         }, 1000 / this.FPS)
@@ -64,6 +66,9 @@ const Game = {
 
         })
         this.player.draw(this.framesCounter)
+        this.policias.forEach((policias) => {
+            policias.draw()
+        })
         
     }
 
@@ -92,7 +97,7 @@ const Game = {
                 this.player.height + this.player.posY > personas.posY) {
                 this.personas.splice(index, 1)
                 this.vidas--
-                console.log(this.vidas)
+                
                 this.puntuacion = this.puntuacion - 10
 
             }
@@ -153,6 +158,14 @@ if (this.puntuacion === 600){
     this.player.cambiarSkin()
     this.puntuacion = this.puntuacion + 10
 }
-}
+},
+generatePolicias() {
+    if (this.framesCounter % 210 === 0) {
+        this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, "imagenes/policia__1_-removebg-preview.png"))
+        
+
+    }
+    
+},
 }
 
