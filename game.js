@@ -12,6 +12,9 @@ const Game = {
     puntuacion: 0,
     vidas: 3,
     chucilloMusica: new Audio("Sonido de daño en Minecraft (Nuevotono.Net).mp3"),
+    image: new Image(),
+    src: "imagenes/portada 3 con titulo mono.jpg",
+    
     
     init() {
         this.canvas = document.getElementById("myCanvas")
@@ -40,6 +43,8 @@ const Game = {
             this.colisionesMachete()
             this.contadorDePuntuacion(this.puntuacion)
             this.contadorDeVidas(this.vidas)
+            this.cambiadorDeSkin()
+            
 
         }, 1000 / this.FPS)
     },
@@ -48,6 +53,7 @@ const Game = {
     createAll() {
         this.fondo = new Fondo(this.ctx, this.width, this.height)
         this.player = new Player(this.ctx, this.width, this.height)
+        
     
     },
 
@@ -57,7 +63,7 @@ const Game = {
             persona.draw()
 
         })
-        this.player.draw()
+        this.player.draw(this.framesCounter)
         
     }
 
@@ -87,10 +93,15 @@ const Game = {
                 this.personas.splice(index, 1)
                 this.vidas--
                 console.log(this.vidas)
+                this.puntuacion = this.puntuacion - 10
+
             }
         })
         if (this.vidas === 0) {
             clearInterval(this.intervalId)
+            this.clear()
+            this.player.drawGameOver()
+            this.player.gameover.play()
         }
     },
     colisionesMachete(){
@@ -104,6 +115,8 @@ const Game = {
                 this.personas.splice(index2, 1)
                 this.player.bullets.splice(index1, 1)
                 this.puntuacion = this.puntuacion + 10
+                
+
 
                 
 
@@ -125,7 +138,21 @@ contadorDeVidas(vidas){
     this.ctx.fillStyle = "white"
     this.ctx.font = '30px arial'
     this.ctx.fillText(`Vidas: ${vidas}`, 50, 100)
-}
+},
 
+cambiadorDeSkin(){
+    if (this.puntuacion === 200){
+        this.player.cambiarSkin()
+        this.puntuacion = this.puntuacion + 10
+}
+if (this.puntuacion === 400){
+    this.player.cambiarSkin()
+    this.puntuacion = this.puntuacion + 10
+}
+if (this.puntuacion === 600){
+    this.player.cambiarSkin()
+    this.puntuacion = this.puntuacion + 10
+}
+}
 }
 

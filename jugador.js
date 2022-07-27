@@ -13,7 +13,7 @@ class Player {
       this.image = new Image();
       this.image.src = "./imagenes/demogorgon.png";
       
-  
+  this.arraySkin = ["./imagenes/ghostface512.png","./imagenes/michael_myers512.png", "./imagenes/demogorgon.png", "imagenes/freddy_kruger_1-removebg-preview.png", "imagenes/slender512.png", "imagenes/pennywise-removebg-preview (4) (1).png"]
       this.posX =  50
       this.posY = this.gameHeight - this.height - 80 ;
       this.posY0 = this.posY;
@@ -25,9 +25,15 @@ class Player {
   
       this.setListeners();
       this.musica = new Audio("Sonido - Salto de Mario Bros.mp3")
+
+      this.imagen = new Image();
+      this.imagen.src = "imagenes/portada 3 con titulo mono.jpg"
+      this.gameover = new Audio("game-over-1-gameover.mp3")
+
+      this.cuchilloMuerte= new Audio("onlymp3.to - Lanzar Cuchillo - Efecto de Sonido (HD)-2AF5brFKkvo-192k-1658944904354.mp3")
     }
   
-    draw() {
+    draw(framesCounter) {
       this.ctx.drawImage(
         this.image,
         this.posX,
@@ -37,17 +43,15 @@ class Player {
        
         
       )
-      //ctx.drawImage(image, 33, 71, 104, 124, 21, 20, 87, 104);
+   
       
       this.bullets.forEach((bullet) => {
-       bullet.draw()
+       bullet.draw(framesCounter)
       })
       this.move()
       this.clearObatacles()
     }
-    
-  
-    /*animate(framesCounter) {
+    animate(framesCounter) {
       if (framesCounter % 8 == 0) {
         this.image.framesIndex++
       }
@@ -55,9 +59,21 @@ class Player {
         this.image.framesIndex = 0
       }
   
-    }
-    */
-  
+    } 
+    
+    drawGameOver() {
+      this.ctx.drawImage(
+        this.imagen,
+        0,
+        0,
+        this.gameWidth,
+      this.gameHeight,
+        
+      )
+       
+       }
+
+ 
     move() {
       if (this.posY < this.posY0) {
         this.musica.play()
@@ -83,6 +99,7 @@ class Player {
             break
           case "s":
             this.shoot()
+            this.cuchilloMuerte.play()
             break
         }
       });
@@ -106,7 +123,13 @@ class Player {
         })
         
     }
-  
-  
+    cambiarSkin(){
+    
+      
+           this.image.src = this.arraySkin[Math.floor(Math.random()* this.arraySkin.length)]
+           console.log("Hola")
+   
+          }
+   
   }
-  
+
