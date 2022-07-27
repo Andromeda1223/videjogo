@@ -13,11 +13,11 @@ class Machete {
 
         this.radius = 5;
 
-        this.velX = 10;
+        this.velX = 12;
         this.velY = 1;
         this.image = new Image(),
         this.image.src = "imagenes/machete-removebg-preview.png",
-        this.gravity = 0.4;
+        this.gravity = 0.2;
     }
 
     draw() {
@@ -33,15 +33,12 @@ class Machete {
     }
 
     move() {
-        this.posX += this.velX + 10
-        this.posY += this.velY
-
+        this.posX += this.velX 
+        this.posY += this.velY 
         this.velY += this.gravity
         
 
-        if (this.posY >= this.playerPosY0 + this.playerHeight) {
-            
-        }
+        
         
     }
     
