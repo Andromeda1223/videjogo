@@ -31,6 +31,10 @@ class Player {
       this.gameover = new Audio("game-over-1-gameover.mp3")
 
       this.cuchilloMuerte= new Audio("onlymp3.to - Lanzar Cuchillo - Efecto de Sonido (HD)-2AF5brFKkvo-192k-1658944904354.mp3")
+    
+      this.imagen1 = new Image();
+      this.imagen1.src = "corazon-removebg-preview.png"
+    
     }
   
     draw(framesCounter) {
@@ -50,6 +54,17 @@ class Player {
       })
       this.move()
       this.clearObatacles()
+    }
+
+    drawImagen1(){
+      this.ctx.drawImage(
+        this.imagen1,
+50,
+        60,
+        100,
+        100       
+        
+      )
     }
     animate(framesCounter) {
       if (framesCounter % 8 == 0) {

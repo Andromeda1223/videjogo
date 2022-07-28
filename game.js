@@ -18,7 +18,8 @@ const Game = {
     arrayVidas: [],
     audioMusica: new Audio("Michael Myers Theme.m4r"),
 
-    imagen: new Image("EFECTOS (277).gif"),
+    imagen: new Image(),
+    src: "corazon-removebg-preview.png",
     
     arrayImagenesSkin: ["./imagenes/victima1.png", "./imagenes/victima2.png", "./imagenes/victima3.png", "./imagenes/victima4.png"],
     arraySkinPolicia: ["./imagenes/fila-1-columna-1__2_-removebg-preview.png", "./imagenes/Polichia.png"],
@@ -51,6 +52,7 @@ const Game = {
             this.colisionesMachete()
             this.contadorDePuntuacion(this.puntuacion)
             this.contadorDeVidas(this.vidas)
+            this.player.drawImagen1()
             
             this.isCollisionPolichia()
             this.colisionVidas()
@@ -89,6 +91,7 @@ const Game = {
         this.arrayVidas.forEach((policias) => {
             policias.draw()
         })
+        
     }
 
     ,
@@ -116,7 +119,7 @@ const Game = {
                 this.personas.splice(index, 1)
 
                 this.puntuacion = this.puntuacion - 10
-                this.imagen.draw() 
+               
 
             }
         })
@@ -159,9 +162,9 @@ const Game = {
         this.ctx.fillText(`Score: ${puntuacion}`, 50, 50)
     },
     contadorDeVidas(vidas) {
-        this.ctx.fillStyle = "white"
-        this.ctx.font = '30px arial'
-        this.ctx.fillText(`Vidas: ${vidas}`, 50, 100)
+        
+        //this.ctx.drawImage("corazon-removebg-preview.png", 25, 100)
+        this.ctx.fillText(`.  x ${vidas}`, 100, 120)
     },
     
 
