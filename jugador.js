@@ -59,10 +59,10 @@ class Player {
     drawImagen1(){
       this.ctx.drawImage(
         this.imagen1,
-50,
+        this.gameWidth - 230,
         60,
         100,
-        100       
+        100,       
         
       )
     }

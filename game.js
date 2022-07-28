@@ -159,12 +159,12 @@ const Game = {
     contadorDePuntuacion(puntuacion) {
         this.ctx.fillStyle = "white"
         this.ctx.font = '30px arial'
-        this.ctx.fillText(`Score: ${puntuacion}`, 50, 50)
+        this.ctx.fillText(`Score: ${puntuacion}`, this.width - 220, 50)
     },
     contadorDeVidas(vidas) {
         
         //this.ctx.drawImage("corazon-removebg-preview.png", 25, 100)
-        this.ctx.fillText(`.  x ${vidas}`, 100, 120)
+        this.ctx.fillText(`.  x ${vidas}`, this.width - 180, 120)
     },
     
 
