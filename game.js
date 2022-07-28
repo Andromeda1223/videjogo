@@ -11,12 +11,13 @@ const Game = {
     intervalId: undefined,
     puntuacion: 0,
     vidas: 3,
-    chucilloMusica: new Audio("Sonido de daño en Minecraft (Nuevotono.Net).mp3"),
+    chucilloMusica: new Audio("Audio de Jose Ramon.mp3"),
     image: new Image(),
     src: "imagenes/portada 3 con titulo mono.jpg",
     policias: [],
     arrayVidas: [],
     audioMusica: new Audio("Michael Myers Theme.m4r"),
+    audioRisa: new Audio("Risa del Joker de Joaquin Phoenix.mp3"),
 
     imagen: new Image(),
     src: "corazon-removebg-preview.png",
@@ -57,7 +58,7 @@ const Game = {
             this.isCollisionPolichia()
             this.colisionVidas()
             if(this.framesCounter % 1200 === 0){
-                
+                this.player.transformacion.play()
                 this.player.cambiarSkin()
             }
 
@@ -100,7 +101,7 @@ const Game = {
 
     },
     generatePersonas() {
-        if (this.framesCounter % 333 === 0) {
+        if (this.framesCounter % 231 === 0) {
             numAleatorio = Math.floor(Math.random() * this.arrayImagenesSkin.length)
 
             this.personas.push(new Persona(this.ctx, this.width, this.player.posY0, this.player.height, this.arrayImagenesSkin[numAleatorio]))
@@ -119,16 +120,22 @@ const Game = {
                 this.personas.splice(index, 1)
 
                 this.puntuacion = this.puntuacion - 10
+                this.player.choque.play()
                
 
             }
         })
         if (this.vidas === 0) {
-            clearInterval(this.intervalId)
+           clearInterval(this.intervalId)
             this.clear()
+            if (this.puntuacion < -100){
+              this.player.sonidoMuerteKrillin.play()
+            }
             this.player.drawGameOver()
             this.player.gameover.play()
             this.audioMusica.pause()
+            this.audioRisa.play()
+            
         }
     },
     colisionesMachete() {
@@ -174,14 +181,23 @@ const Game = {
         }
     },
     generatePolicias() {
+        if( (this.puntuacion < 100))
         if (this.framesCounter % 533 === 0) {
             this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, this.arraySkinPolicia[Math.floor(Math.random() * this.arraySkinPolicia.length)]))
-
+            
 
         }
         if (this.puntuacion > 100) {
             if (this.framesCounter % 400 === 0) {
                 this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, this.arraySkinPolicia[Math.floor(Math.random() * this.arraySkinPolicia.length)]))
+                this.player.drawImagenDificulti()
+            }
+        }
+        if (this.puntuacion > 200){
+            if (this.framesCounter % 200 === 0) {
+
+            this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, this.arraySkinPolicia[Math.floor(Math.random() * this.arraySkinPolicia.length)]))
+            this.player.drawImagenDificulti()
             }
         }
 
@@ -193,8 +209,10 @@ const Game = {
                 this.player.posX + this.player.width > personas.posX &&
                 this.player.posY < personas.posY + personas.height &&
                 this.player.height + this.player.posY > personas.posY) {
+                    this.player.choque.play()
                 this.puntuacion = this.puntuacion - 20
                 this.policias.splice(index, 1)
+                
                 this.vidas--
             }
 

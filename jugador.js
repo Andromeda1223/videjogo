@@ -9,7 +9,7 @@ class Player {
   
       this.width = 100;
       this.height = 200;
-      this.arraySkin = ["./imagenes/ghostface512.png","./imagenes/michael_myers512.png", "./imagenes/demogorgon.png", "imagenes/freddy_kruger_1-removebg-preview.png", "imagenes/slender512.png", "imagenes/pennywise-removebg-preview (4) (1).png"]
+      this.arraySkin = ["./imagenes/ghostface512.png","./imagenes/michael_myers512.png", "imagenes/freddy_kruger_1-removebg-preview.png", "imagenes/slender512.png", "imagenes/pennywise-removebg-preview (4) (1).png", "imagenes/jason_vorhees_cuad__1_-removebg-preview.png", "imagenes/Pyramid_Head__Dead_by_Daylight.png", "imagenes/Leatherface.png", "imagenes/Jack Torrance.png"]
       this.image = new Image();
       this.image.src = this.arraySkin[Math.floor(Math.random()* this.arraySkin.length)];
       
@@ -35,6 +35,14 @@ class Player {
       this.imagen1 = new Image();
       this.imagen1.src = "corazon-removebg-preview.png"
     
+
+      this.imagenDificulti = new Image()
+      this.imagenDificulti.src = "1ebcf5fcb8cab9abf04cf2d13e1aca53.png"
+
+    this.transformacion = new Audio("Whoosh_01_Sound_Effect_Mp3_37.mp3")
+    this.choque = new Audio("sonido choque.mp3")
+
+    this.sonidoMuerteKrillin = new Audio("grito-de-krillin.mp3")
     }
   
     draw(framesCounter) {
@@ -66,6 +74,7 @@ class Player {
         
       )
     }
+
     animate(framesCounter) {
       if (framesCounter % 8 == 0) {
         this.image.framesIndex++
