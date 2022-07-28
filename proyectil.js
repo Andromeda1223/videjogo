@@ -5,9 +5,9 @@ class Machete {
         this.ctx = ctx;
 
         this.posX = playerPosX + playerWidth;
-        this.posY = playerPosY + playerHeight / 2;
-        this.height = 70
-        this.width = 70
+        this.posY = playerPosY + playerHeight / 2 - 10;
+        this.height = 90
+        this.width = 90
         this.playerPosY0 = playerPosY0;
         this.playerHeight = playerHeight;
 

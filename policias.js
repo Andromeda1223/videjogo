@@ -3,7 +3,7 @@ class Policia {
   
       this.ctx = ctx;
       this.width = 100;
-      this.height = 120;
+      this.height = 200;
   
       this.posX = gameWidth;
       this.posY = playerPosY0 + playerHeight - this.height + 50;

@@ -8,12 +8,12 @@ class Player {
       this.gameHeight = gameH;
   
       this.width = 100;
-      this.height = 100;
-  
+      this.height = 200;
+      this.arraySkin = ["./imagenes/ghostface512.png","./imagenes/michael_myers512.png", "./imagenes/demogorgon.png", "imagenes/freddy_kruger_1-removebg-preview.png", "imagenes/slender512.png", "imagenes/pennywise-removebg-preview (4) (1).png"]
       this.image = new Image();
-      this.image.src = "./imagenes/demogorgon.png";
+      this.image.src = this.arraySkin[Math.floor(Math.random()* this.arraySkin.length)];
       
-  this.arraySkin = ["./imagenes/ghostface512.png","./imagenes/michael_myers512.png", "./imagenes/demogorgon.png", "imagenes/freddy_kruger_1-removebg-preview.png", "imagenes/slender512.png", "imagenes/pennywise-removebg-preview (4) (1).png"]
+  
       this.posX =  50
       this.posY = this.gameHeight - this.height - 80 ;
       this.posY0 = this.posY;
@@ -38,8 +38,8 @@ class Player {
         this.image,
         this.posX,
         this.posY,
-        150,
-        150,
+        250,
+        250,
        
         
       )
@@ -76,7 +76,7 @@ class Player {
  
     move() {
       if (this.posY < this.posY0) {
-        this.musica.play()
+        
         this.posY += this.velY
         this.velY += this.gravity
         
@@ -106,8 +106,9 @@ class Player {
     }
   
     jump() {
-      this.posY -= 60
-      this.velY -= 10
+      this.posY -= 80
+      this.velY -= 15
+      this.musica.play()
     }
   
     shoot() {
@@ -127,7 +128,7 @@ class Player {
     
       
            this.image.src = this.arraySkin[Math.floor(Math.random()* this.arraySkin.length)]
-           console.log("Hola")
+           
    
           }
    

@@ -16,7 +16,12 @@ const Game = {
     src: "imagenes/portada 3 con titulo mono.jpg",
     policias: [],
     arrayVidas: [],
+    audioMusica: new Audio("Michael Myers Theme.m4r"),
 
+    imagen: new Image("EFECTOS (277).gif"),
+    
+    arrayImagenesSkin: ["./imagenes/victima1.png", "./imagenes/victima2.png", "./imagenes/victima3.png", "./imagenes/victima4.png"],
+    arraySkinPolicia: ["./imagenes/fila-1-columna-1__2_-removebg-preview.png", "./imagenes/Polichia.png"],
     init() {
         this.canvas = document.getElementById("myCanvas")
         this.ctx = this.canvas.getContext("2d")
@@ -46,10 +51,17 @@ const Game = {
             this.colisionesMachete()
             this.contadorDePuntuacion(this.puntuacion)
             this.contadorDeVidas(this.vidas)
-            this.cambiadorDeSkin()
+            
             this.isCollisionPolichia()
             this.colisionVidas()
+            if(this.framesCounter % 1200 === 0){
+                
+                this.player.cambiarSkin()
+            }
 
+            if(this.framesCounter % 60 === 0){
+                this.musicaFondo()
+            }
 
 
         }, 1000 / this.FPS)
@@ -73,7 +85,7 @@ const Game = {
         this.policias.forEach((policias) => {
             policias.draw()
         })
-       
+
         this.arrayVidas.forEach((policias) => {
             policias.draw()
         })
@@ -85,15 +97,14 @@ const Game = {
 
     },
     generatePersonas() {
-        if (this.framesCounter % 300 === 0) {
-            this.personas.push(new Persona(this.ctx, this.width, this.player.posY0, this.player.height, "imagenes/victima_2-removebg-preview.png"))
+        if (this.framesCounter % 333 === 0) {
+            numAleatorio = Math.floor(Math.random() * this.arrayImagenesSkin.length)
+
+            this.personas.push(new Persona(this.ctx, this.width, this.player.posY0, this.player.height, this.arrayImagenesSkin[numAleatorio]))
 
 
         }
-        if (this.framesCounter % 120 === 0) {
-            this.personas.push(new Persona(this.ctx, this.width, this.player.posY0, this.player.height, "imagenes/victima_1-preview-removebg-preview.png"))
 
-        }
 
     },
     isCollision() {
@@ -105,6 +116,7 @@ const Game = {
                 this.personas.splice(index, 1)
 
                 this.puntuacion = this.puntuacion - 10
+                this.imagen.draw() 
 
             }
         })
@@ -113,6 +125,7 @@ const Game = {
             this.clear()
             this.player.drawGameOver()
             this.player.gameover.play()
+            this.audioMusica.pause()
         }
     },
     colisionesMachete() {
@@ -125,7 +138,7 @@ const Game = {
                     this.sonido()
                     this.personas.splice(index2, 1)
                     this.player.bullets.splice(index1, 1)
-                    this.puntuacion = this.puntuacion + 10
+                    this.puntuacion = this.puntuacion + 20
 
 
 
@@ -150,47 +163,25 @@ const Game = {
         this.ctx.font = '30px arial'
         this.ctx.fillText(`Vidas: ${vidas}`, 50, 100)
     },
+    
 
-    cambiadorDeSkin() {
-        if (this.puntuacion === 200) {
-            this.player.cambiarSkin()
-            this.puntuacion = this.puntuacion + 10
-        }
-        if (this.puntuacion === 400) {
-            this.player.cambiarSkin()
-            this.puntuacion = this.puntuacion + 10
-        }
-        if (this.puntuacion === 600) {
-            this.player.cambiarSkin()
-            this.puntuacion = this.puntuacion + 10
-        }
-        if (this.puntuacion === 800) {
-            this.player.cambiarSkin()
-            this.puntuacion = this.puntuacion + 10
-        }
-        if (this.puntuacion === 100) {
-            this.player.cambiarSkin()
-            this.puntuacion = this.puntuacion + 10
-        }
-        if (this.puntuacion === 1200) {
-            this.player.cambiarSkin()
-            this.puntuacion = this.puntuacion + 10
-        }
-    },
     generateVidas() {
         if (this.framesCounter % 1000 === 0) {
             this.arrayVidas.push(new Vida(this.ctx, this.width, this.player.posY0, this.player.height, "imagenes/2767b988ec94acbd05327e733baff3cc-removebg-preview.png"))
         }
     },
     generatePolicias() {
-        if (this.framesCounter % 450 === 0) {
-            this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, "imagenes/policia__1_-removebg-preview.png"))
+        if (this.framesCounter % 533 === 0) {
+            this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, this.arraySkinPolicia[Math.floor(Math.random() * this.arraySkinPolicia.length)]))
 
 
         }
-        if (this.framesCounter % 523 === 0) {
-            this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, "imagenes/SaraConor.png"))
+        if (this.puntuacion > 100) {
+            if (this.framesCounter % 400 === 0) {
+                this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, this.arraySkinPolicia[Math.floor(Math.random() * this.arraySkinPolicia.length)]))
+            }
         }
+
 
     },
     isCollisionPolichia() {
@@ -199,7 +190,7 @@ const Game = {
                 this.player.posX + this.player.width > personas.posX &&
                 this.player.posY < personas.posY + personas.height &&
                 this.player.height + this.player.posY > personas.posY) {
-
+                this.puntuacion = this.puntuacion - 20
                 this.policias.splice(index, 1)
                 this.vidas--
             }
@@ -208,18 +199,22 @@ const Game = {
 
     },
     musicaFondo() {
-        
+        this.audioMusica.volume = 0.2
+        this.audioMusica.play()
+
     },
-colisionVidas(){
+    colisionVidas() {
         this.arrayVidas.forEach((personas, index) => {
             if (this.player.posX < personas.posX + personas.width &&
                 this.player.posX + this.player.width > personas.posX &&
                 this.player.posY < personas.posY + personas.height &&
                 this.player.height + this.player.posY > personas.posY) {
-                    this.arrayVidas.splice(index, 1)
-                this.vidas ++
-        }
-    })
+                this.arrayVidas.splice(index, 1)
+                this.vidas++
+            }
+        })
 
-},
+    },
+
+    
 }
