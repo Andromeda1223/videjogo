@@ -170,7 +170,7 @@ const Game = {
     },
     contadorDeVidas(vidas) {
         
-        //this.ctx.drawImage("corazon-removebg-preview.png", 25, 100)
+        
         this.ctx.fillText(`.  x ${vidas}`, this.width - 180, 120)
     },
     
@@ -188,18 +188,32 @@ const Game = {
 
         }
         if (this.puntuacion > 100) {
-            if (this.framesCounter % 400 === 0) {
+            if (this.framesCounter % 417 === 0) {
                 this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, this.arraySkinPolicia[Math.floor(Math.random() * this.arraySkinPolicia.length)]))
-                this.player.drawImagenDificulti()
+                
             }
         }
         if (this.puntuacion > 200){
-            if (this.framesCounter % 200 === 0) {
+            if (this.framesCounter % 250 === 0) {
 
             this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, this.arraySkinPolicia[Math.floor(Math.random() * this.arraySkinPolicia.length)]))
-            this.player.drawImagenDificulti()
+            
             }
         }
+        if (this.puntuacion > 300){
+            if (this.framesCounter % 233 === 0) {
+
+            this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, this.arraySkinPolicia[Math.floor(Math.random() * this.arraySkinPolicia.length)]))
+            
+            }
+        }
+            if (this.puntuacion > 500){
+                if (this.framesCounter % 156 === 0) {
+    
+                this.policias.push(new Policia(this.ctx, this.width, this.player.posY0, this.player.height, this.arraySkinPolicia[Math.floor(Math.random() * this.arraySkinPolicia.length)]))
+                
+                }
+            }
 
 
     },

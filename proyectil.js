@@ -38,25 +38,7 @@ class Machete {
         this.animate(framesCounter)
             this.move()
     }
-/*draw(framesCounter) {
-    this.ctx.drawImage(
-      this.image,
-      this.image.framesIndex * (this.image.width / this.image.frames),
-      0,
-      this.image.width / this.image.frames,
-      this.image.height,
-      this.posX,
-      this.posY,
-      this.width,
-      this.height,
-    )
-    this.animate(framesCounter)
-    this.bullets.forEach((bullet) => {
-      bullet.draw()
-    })
-    this.move()
-  }
-*/
+
   animate(framesCounter) {
     if (framesCounter % 12 == 0) {
       this.image.framesIndex++

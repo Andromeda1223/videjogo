@@ -18,10 +18,7 @@ class Vida {
       draw() {
           this.ctx.drawImage(
             this.image,
-            //this.image.framesIndex * (this.image.width / this.image.frames), 0
             
-            //this.image.width / this.image.frames,
-      //this.image.height,
               this.posX,
               this.posY,
               this.width,

@@ -153,7 +153,7 @@ class Player {
       
            this.image.src = this.arraySkin[Math.floor(Math.random()* this.arraySkin.length)]
            
-   
+   console.log("cambia")
           }
    
   }
